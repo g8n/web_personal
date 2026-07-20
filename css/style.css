@@ -1,0 +1,48 @@
+
+/* Estilos para el cuerpo del documento */
+body{
+    font-family: 'Roboto', 'open sans';
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    background-color: #E5E7EB;
+}
+
+/* Estilos para los encabezados */
+h1{
+    font-size: 50px;
+}
+
+h2{
+    font-size: 40px;
+}
+
+h1, h2{
+    font-family: 'Bebas Neue', 'Helvetica Neue';
+    font-weight: 400;
+    color:#153131;
+}
+
+header nav ul li{
+    list-style: none;
+}
+
+header nav ul li a{
+    text-decoration: none;
+}
+
+/* Estilos para el cuerpo */
+figcaption{
+    font-family: 'Jakobs Handwriting 2', 'open sans';
+    font-size: 40px;
+}
+
+article p em{
+    color: #CDFE00;
+    background-color: #153131;
+
+}
+
+.Destacado{
+    font-weight: bold;
+}
