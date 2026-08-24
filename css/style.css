@@ -50,6 +50,12 @@ header .navbar{
     --bs-navbar-toggler-focus-width: 0.2rem;
 }
 
+/* El .container-fluid de Bootstrap agrega su propio gutter lateral:
+   lo anulamos para que el header alinee con el resto del cuerpo. */
+header .navbar > .container-fluid{
+    padding-inline: 0;
+}
+
 /* El título hace de "marca" del navbar */
 header .navbar-brand h1{
     margin: 0;
@@ -277,6 +283,13 @@ a.boton:active{
     transform: translateY(2px);
 }
 
+/* Las flechas heredan el círculo de los botones de arriba: acá sólo se
+   agranda el signo, que de base se ve muy chico. */
+.carrusel-nav .carrusel-flecha{
+    font-size: 26px;
+    line-height: 1;
+}
+
 /* Footer: contenedor con padding para no pegar al borde */
 footer{
     display: flex;
@@ -331,10 +344,14 @@ article p em{
     h1{ font-size: 50px; }
     h2{ font-size: 40px; }
 
-    /* Ancho máximo de contenido para mejorar la legibilidad */
-    main{
+    /* Ancho máximo de contenido para mejorar la legibilidad.
+       Header y footer comparten el mismo ancho para alinear los márgenes
+       laterales con los del cuerpo. */
+    header,
+    main,
+    footer{
         max-width: 1100px;
-        margin: 0 auto;
+        margin-inline: auto;
     }
 
     /* Foto y texto lado a lado; el título ocupa el ancho completo */
