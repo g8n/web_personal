@@ -143,6 +143,14 @@
                      carrusel, porque Bootstrap busca los indicadores dentro
                      del .carousel para marcar con .active el que corresponde. -->
                 <nav class="carousel-indicators carrusel-nav">
+                    <!-- Flechas: usan data-bs-slide (prev/next) en vez de
+                         data-bs-slide-to, así que avanzan una tarjeta desde
+                         donde estés. Van en la misma fila que los números para
+                         no tener que superponerlas sobre la tarjeta. -->
+                    <button type="button" class="carrusel-flecha"
+                        data-bs-target="#carruselExperiencia" data-bs-slide="prev"
+                        aria-label="Experiencia anterior">&lsaquo;</button>
+
                     <button type="button" class="active" aria-current="true"
                         data-bs-target="#carruselExperiencia" data-bs-slide-to="0"
                         aria-label="Ver experiencia 1">1</button>
@@ -156,6 +164,10 @@
                         aria-label="Ver experiencia 5">5</button>
                     <button type="button" data-bs-target="#carruselExperiencia" data-bs-slide-to="5"
                         aria-label="Ver experiencia 6">6</button>
+
+                    <button type="button" class="carrusel-flecha"
+                        data-bs-target="#carruselExperiencia" data-bs-slide="next"
+                        aria-label="Experiencia siguiente">&rsaquo;</button>
                 </nav>
 
             </div>
