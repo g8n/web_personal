@@ -16,7 +16,7 @@ proceso de build: se abre directamente en el navegador.
 | Índice | `index.html` | Presentación, biografía y habilidades |
 | Servicios | `pages/servicios.html` | Servicios ofrecidos |
 | Sobre mí | `pages/sobreMi.html` | Experiencia laboral en un carrusel de Bootstrap |
-| Proyectos | `pages/proyectos.html` | Proyectos realizados *(en construcción)* |
+| Proyectos | `pages/proyectos.html` | Proyectos realizados |
 | Contacto | `pages/contacto.html` | Email, ubicación y WhatsApp |
 
 Todas las páginas comparten el mismo header con navegación y el mismo footer con

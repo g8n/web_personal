@@ -50,6 +50,12 @@ header .navbar{
     --bs-navbar-toggler-focus-width: 0.2rem;
 }
 
+/* El .container-fluid de Bootstrap agrega su propio gutter lateral:
+   lo anulamos para que el header alinee con el resto del cuerpo. */
+header .navbar > .container-fluid{
+    padding-inline: 0;
+}
+
 /* El título hace de "marca" del navbar */
 header .navbar-brand h1{
     margin: 0;
@@ -161,6 +167,99 @@ section ul{
 .servicio .Destacado{
     padding-bottom: 10px;
     border-bottom: 2px solid #CDFE00;
+}
+
+/* --------------------------------------------------------------------------
+   Proyectos
+   -------------------------------------------------------------------------- */
+.proyectos{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.proyecto{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+/* Logo a la izquierda y nombre + rubro a la derecha */
+.proyecto-encabezado{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #CDFE00;
+}
+
+.proyecto .logo{
+    flex: 0 0 auto;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.proyecto h3{
+    font-family: 'Bebas Neue', 'Helvetica Neue';
+    font-weight: 400;
+    font-size: 24px;
+    color: #153131;
+}
+
+.proyecto .rubro{
+    font-size: 14px;
+    color: #555555;
+}
+
+/* La etapa del negocio: es el dato que ubica al lector, va resaltada */
+.proyecto .etapa{
+    align-self: start;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: #153131;
+    color: #CDFE00;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.proyecto .bloque{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.proyecto h4{
+    font-family: 'Bebas Neue', 'Helvetica Neue';
+    font-weight: 400;
+    font-size: 20px;
+    color: #153131;
+}
+
+/* Las habilidades aplicadas, como etiquetas al pie de la tarjeta */
+.proyecto .keywords{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+    padding-left: 0;
+    padding-top: 10px;
+    border-top: 2px solid #CDFE00;
+}
+
+.proyecto .keywords li{
+    padding: 5px 10px;
+    border: 2px solid #153131;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #153131;
 }
 
 .como-trabajo{
@@ -322,6 +421,13 @@ a.boton:active{
     transform: translateY(2px);
 }
 
+/* Las flechas heredan el círculo de los botones de arriba: acá sólo se
+   agranda el signo, que de base se ve muy chico. */
+.carrusel-nav .carrusel-flecha{
+    font-size: 26px;
+    line-height: 1;
+}
+
 /* Footer: contenedor con padding para no pegar al borde */
 footer{
     display: flex;
@@ -366,6 +472,16 @@ article p em{
     .datos-contacto{
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .servicios{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Son cinco tarjetas: la última se estira para no dejar un hueco al
+       final de la grilla. */
+    .servicio:last-child{
+        grid-column: 1 / -1;
+    }
 }
 
 /* ==========================================================================
@@ -376,10 +492,14 @@ article p em{
     h1{ font-size: 50px; }
     h2{ font-size: 40px; }
 
-    /* Ancho máximo de contenido para mejorar la legibilidad */
-    main{
+    /* Ancho máximo de contenido para mejorar la legibilidad.
+       Header y footer comparten el mismo ancho para alinear los márgenes
+       laterales con los del cuerpo. */
+    header,
+    main,
+    footer{
         max-width: 1100px;
-        margin: 0 auto;
+        margin-inline: auto;
     }
 
     /* Foto y texto lado a lado; el título ocupa el ancho completo */
@@ -393,5 +513,20 @@ article p em{
 
     .datos-contacto{
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .servicio h3{
+        font-size: 28px;
+    }
+
+    /* Las tarjetas de proyecto son largas: recién en desktop entran de a dos
+       sin que el texto quede demasiado angosto. */
+    .proyectos{
+        grid-template-columns: repeat(2, 1fr);
+        align-items: stretch;
+    }
+
+    .proyecto h3{
+        font-size: 28px;
     }
 }
