@@ -133,6 +133,51 @@ section ul{
 }
 
 /* --------------------------------------------------------------------------
+   Servicios: cada tarjeta plantea una pregunta del negocio y responde con el
+   servicio.
+   -------------------------------------------------------------------------- */
+.servicios{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.servicio{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.servicio h3{
+    font-family: 'Bebas Neue', 'Helvetica Neue';
+    font-weight: 400;
+    font-size: 24px;
+    color: #153131;
+}
+
+.servicio .Destacado{
+    padding-bottom: 10px;
+    border-bottom: 2px solid #CDFE00;
+}
+
+.como-trabajo{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #153131;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.como-trabajo h2{
+    color: #CDFE00;
+}
+
+/* --------------------------------------------------------------------------
    Contacto: tarjetas en grilla. En mobile, una sola columna.
    -------------------------------------------------------------------------- */
 .datos-contacto{

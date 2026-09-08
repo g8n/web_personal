@@ -14,7 +14,7 @@ proceso de build: se abre directamente en el navegador.
 | Página | Archivo | Qué muestra |
 |---|---|---|
 | Índice | `index.html` | Presentación, biografía y habilidades |
-| Servicios | `pages/servicios.html` | Servicios ofrecidos *(en construcción)* |
+| Servicios | `pages/servicios.html` | Servicios ofrecidos |
 | Sobre mí | `pages/sobreMi.html` | Experiencia laboral en un carrusel de Bootstrap |
 | Proyectos | `pages/proyectos.html` | Proyectos realizados *(en construcción)* |
 | Contacto | `pages/contacto.html` | Email, ubicación y WhatsApp |
