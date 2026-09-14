@@ -1,0 +1,38 @@
+// ==========================================================================
+// TIPOGRAFÍA
+// Jerarquía de títulos y recursos de énfasis del texto.
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+h1{
+    @include titulo($fs-h1);
+
+    @include desktop{
+        font-size: $fs-h1-desktop;
+    }
+}
+
+h2{
+    @include titulo($fs-h2);
+
+    @include desktop{
+        font-size: $fs-h2-desktop;
+    }
+}
+
+// La firma manuscrita bajo la foto de la portada.
+figcaption{
+    font-family: $fuente-firma;
+    font-size: $fs-firma;
+}
+
+// Énfasis dentro de un párrafo: se resalta como un marcador.
+article p em{
+    @include colores-invertidos;
+}
+
+.Destacado{
+    font-weight: $peso-fuerte;
+}

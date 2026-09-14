@@ -1,0 +1,33 @@
+// ==========================================================================
+// MAIN
+// Único punto de entrada del proyecto: es el archivo que se compila.
+//
+//   sass scss/main.scss css/style.css
+//
+// El orden de los @use es el orden en que salen las reglas al CSS final, y
+// por lo tanto el que resuelve los empates de especificidad. No moverlo a la
+// ligera: "buttons" tiene que ir después de "cards" para que el color de
+// "a.boton" le gane al de ".dato a".
+// ==========================================================================
+
+// 1. Utilidades: variables y mixins. No generan CSS por sí solas; cada
+//    partial las vuelve a cargar con @use donde las necesita.
+@use "utilities/variables" as *;
+@use "utilities/mixins" as *;
+
+// 2. Base: reset y etiquetas globales.
+@use "base/base";
+@use "base/tipografia";
+
+// 3. Layout: las grandes zonas de la página.
+@use "layout/header";
+@use "layout/nav";
+@use "layout/grillas";
+@use "layout/footer";
+
+// 4. Components: las piezas repetibles.
+@use "components/cards";
+@use "components/buttons";
+@use "components/presentacion";
+@use "components/proyectos";
+@use "components/carrusel";

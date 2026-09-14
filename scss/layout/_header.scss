@@ -1,0 +1,17 @@
+// ==========================================================================
+// HEADER
+// Caja del encabezado. La navegación vive en _nav.scss.
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+header{
+    padding: $esp-md;
+    margin-bottom: $esp-md;
+
+    // Mismo ancho que main y footer, para que los márgenes laterales alineen.
+    @include desktop{
+        @include contenedor-centrado;
+    }
+}

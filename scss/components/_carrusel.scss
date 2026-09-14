@@ -1,0 +1,89 @@
+// ==========================================================================
+// CARRUSEL
+// Carrusel de Bootstrap, con dos cambios: las diapositivas se apilan en una
+// misma celda de grid para que el cruce sea un fundido (y no un salto), y
+// los indicadores se reemplazan por botones numerados.
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+.carrusel{
+
+    .carousel-inner{
+        display: grid;
+    }
+
+    // Todas las diapositivas ocupan la misma celda: la activa se revela.
+    .carousel-item{
+        display: block;
+        grid-area: 1 / 1;
+        float: none;
+        margin-right: 0;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity $duracion-lenta $curva;
+
+        &.active{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+.carrusel-nav{
+    position: static;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: $esp-sm;
+    margin: $esp-md 0 0;
+    padding: 0;
+
+    // Botones circulares numerados. El orden de los estados importa:
+    // hover, activo y presionado comparten especificidad.
+    [data-bs-target]{
+        box-sizing: border-box;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $tamano-boton-nav;
+        height: $tamano-boton-nav;
+        margin: 0;
+        padding: 0;
+        border: $borde-ancho solid $color-primario;
+        border-radius: $radio-circulo;
+        background-color: transparent;
+        color: $color-primario;
+        text-indent: 0;
+        opacity: 1;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: $peso-fuerte;
+        cursor: pointer;
+        @include transicion-boton;
+
+        &:hover{
+            @include colores-invertidos;
+        }
+
+        // La diapositiva en pantalla queda marcada y sin cursor de click.
+        &.active{
+            @include colores-invertidos;
+            cursor: default;
+        }
+
+        &:active{
+            @include colores-realce;
+            transform: translateY($desplazamiento-activo);
+        }
+    }
+
+    // Las flechas heredan el círculo de los botones de arriba: acá sólo se
+    // agranda el signo, que de base se ve muy chico.
+    .carrusel-flecha{
+        font-size: $fs-flecha;
+        line-height: 1;
+    }
+}

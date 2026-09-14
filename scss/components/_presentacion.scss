@@ -1,0 +1,46 @@
+// ==========================================================================
+// PRESENTACIÓN
+// Grid maestro de la portada, con áreas semánticas. En mobile las áreas se
+// apilan en una sola columna; en desktop la foto y el texto van al lado.
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+.presentacion{
+    display: grid;
+    gap: $esp-md;
+    grid-template-areas:
+        "titulo"
+        "foto"
+        "texto";
+
+    h2{
+        grid-area: titulo;
+    }
+
+    figure{
+        grid-area: foto;
+        @include flex-columna($esp-sm);
+    }
+
+    article{
+        grid-area: texto;
+        @include flex-columna($esp-md);
+    }
+
+    img{
+        width: 100%;
+        max-width: $ancho-foto;
+        height: auto;
+    }
+
+    // El título ocupa el ancho completo y debajo se reparten foto y texto.
+    @include desktop{
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            "titulo titulo"
+            "foto   texto";
+        align-items: start;
+    }
+}

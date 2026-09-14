@@ -1,0 +1,73 @@
+// ==========================================================================
+// CARDS
+// Las cajas con fondo y esquinas redondeadas que se repiten en todo el
+// sitio. Todas salen del mixin tarjeta(): sólo cambian el fondo y el gap.
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+// --------------------------------------------------------------------------
+// Servicios: cada tarjeta plantea una pregunta del negocio y la responde.
+// --------------------------------------------------------------------------
+.servicio{
+    @include tarjeta($gap: $esp-sm);
+
+    h3{
+        @include titulo($fs-h3);
+
+        @include desktop{
+            font-size: $fs-h3-desktop;
+        }
+    }
+
+    // La respuesta destacada queda separada del resto por la línea lima.
+    .Destacado{
+        @include separador(bottom);
+    }
+}
+
+// --------------------------------------------------------------------------
+// Contacto: email, ubicación y WhatsApp.
+// --------------------------------------------------------------------------
+.dato{
+    @include tarjeta($gap: $esp-sm);
+
+    a{
+        text-decoration: none;
+        color: $color-primario;
+    }
+}
+
+// --------------------------------------------------------------------------
+// Experiencia laboral (las diapositivas del carrusel).
+// height: 100% para que todas midan igual dentro del carrusel.
+// --------------------------------------------------------------------------
+.experiencia{
+    @include tarjeta($gap: $esp-sm);
+    height: 100%;
+
+    .logo{
+        @include logo-empresa;
+    }
+
+    .empresa{
+        font-weight: $peso-fuerte;
+    }
+
+    .periodo{
+        @include metadato;
+    }
+}
+
+// --------------------------------------------------------------------------
+// "Cómo trabajo": la única tarjeta en negativo, para que corte la página.
+// --------------------------------------------------------------------------
+.como-trabajo{
+    @include tarjeta($color-primario, $esp-md);
+    color: $color-texto-invertido;
+
+    h2{
+        color: $color-acento;
+    }
+}
