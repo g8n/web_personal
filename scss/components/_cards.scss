@@ -1,17 +1,25 @@
 // ==========================================================================
 // CARDS
-// Las cajas con fondo y esquinas redondeadas que se repiten en todo el
-// sitio. Todas salen del mixin tarjeta(): sólo cambian el fondo y el gap.
+// Las cajas con fondo y esquinas redondeadas que se repiten en todo el sitio.
+//
+// Antes todas llamaban a @include tarjeta(), y las mismas cuatro
+// declaraciones salían repetidas cuatro veces en style.css. Ahora extienden
+// %superficie-tarjeta y salen una sola vez, con los selectores agrupados.
+//
+// La única que sigue con el mixin es .como-trabajo: su fondo es distinto al
+// de las demás, y ese es justamente el caso que pide un parámetro.
 // ==========================================================================
 
 @use "../utilities/variables" as *;
 @use "../utilities/mixins" as *;
+@use "../utilities/placeholders" as *;
 
 // --------------------------------------------------------------------------
 // Servicios: cada tarjeta plantea una pregunta del negocio y la responde.
 // --------------------------------------------------------------------------
 .servicio{
-    @include tarjeta($gap: $esp-sm);
+    @extend %superficie-tarjeta;
+    @extend %tarjeta-interactiva;
 
     h3{
         @include titulo($fs-h3);
@@ -31,10 +39,11 @@
 // Contacto: email, ubicación y WhatsApp.
 // --------------------------------------------------------------------------
 .dato{
-    @include tarjeta($gap: $esp-sm);
+    @extend %superficie-tarjeta;
+    @extend %tarjeta-interactiva;
 
     a{
-        text-decoration: none;
+        @extend %enlace-limpio;
         color: $color-primario;
     }
 }
@@ -44,11 +53,17 @@
 // height: 100% para que todas midan igual dentro del carrusel.
 // --------------------------------------------------------------------------
 .experiencia{
-    @include tarjeta($gap: $esp-sm);
+    @extend %superficie-tarjeta;
     height: 100%;
 
     .logo{
         @include logo-empresa;
+        transition: transform $duracion-lenta $curva;
+    }
+
+    // El logo crece apenas al pasar el mouse por la tarjeta entera.
+    &:hover .logo{
+        transform: scale($escala-hover);
     }
 
     .empresa{
@@ -65,7 +80,8 @@
 // --------------------------------------------------------------------------
 .como-trabajo{
     @include tarjeta($color-primario, $esp-md);
-    color: $color-texto-invertido;
+    @include degradado-oscuro;
+    box-shadow: $sombra-suave;
 
     h2{
         color: $color-acento;

@@ -7,8 +7,30 @@
 @use "../utilities/variables" as *;
 @use "../utilities/mixins" as *;
 
+// --------------------------------------------------------------------------
+// Entrada en cascada
+// Las tarjetas de una grilla no aparecen todas juntas: cada una arranca un
+// poco después que la anterior. El retardo no se escribe siete veces a mano,
+// se calcula con un @for y el operador de multiplicación de Sass.
+//
+// Animate.css no sirve para esto: sus clases de retardo van de un segundo en
+// un segundo, y acá hacen falta escalones de 0.12s.
+// --------------------------------------------------------------------------
+$items-en-cascada: 7;
+
+@mixin cascada($selector) {
+    #{$selector} {
+        @for $i from 1 through $items-en-cascada {
+            &:nth-child(#{$i}) {
+                @include animar(subir, $duracion-entrada, $retardo-escalonado * $i);
+            }
+        }
+    }
+}
+
 .servicios{
     @include grilla(1);
+    @include cascada(".servicio");
 
     @include tablet{
         grid-template-columns: repeat(2, 1fr);
@@ -23,6 +45,7 @@
 
 .proyectos{
     @include grilla(1);
+    @include cascada(".proyecto");
 
     // Las tarjetas de proyecto son largas: recién en desktop entran de a dos
     // sin que el texto quede demasiado angosto.
@@ -34,6 +57,7 @@
 
 .datos-contacto{
     @include grilla(1);
+    @include cascada(".dato");
 
     @include tablet{
         grid-template-columns: repeat(2, 1fr);

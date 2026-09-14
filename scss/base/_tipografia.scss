@@ -5,6 +5,7 @@
 
 @use "../utilities/variables" as *;
 @use "../utilities/mixins" as *;
+@use "../utilities/placeholders" as *;
 
 h1{
     @include titulo($fs-h1);
@@ -14,8 +15,26 @@ h1{
     }
 }
 
+// Cada h2 lleva debajo una línea lima en degradado que se dibuja sola al
+// cargar. La línea es un ::after, no un border: un pseudo-elemento se puede
+// escalar con transform (un borde no) y eso es lo que permite animarlo.
 h2{
     @include titulo($fs-h2);
+
+    &::after{
+        content: "";
+        display: block;
+        width: $ancho-linea-titulo;
+        max-width: 100%;
+        height: $alto-linea-titulo;
+        margin-top: $esp-xs;
+        border-radius: $alto-linea-titulo;
+        @include degradado($grad-acento-desde, $grad-acento-hasta, to right);
+
+        // Crece desde el borde izquierdo, no desde el centro.
+        transform-origin: left;
+        @include animar(crecer-linea, $duracion-lenta, $retardo-escalonado);
+    }
 
     @include desktop{
         font-size: $fs-h2-desktop;
@@ -28,11 +47,23 @@ figcaption{
     font-size: $fs-firma;
 }
 
-// Énfasis dentro de un párrafo: se resalta como un marcador.
+// Énfasis dentro de un párrafo: se resalta como un marcador. El degradado
+// hace que el resaltado no se vea como un bloque plano de color.
 article p em{
-    @include colores-invertidos;
+    padding: 0 $esp-xs;
+    border-radius: $radio-borde;
+    @include degradado-oscuro(to right);
+    color: $color-acento;
+    font-style: normal;
 }
 
 .Destacado{
     font-weight: $peso-fuerte;
+}
+
+// Los enlaces de texto corrido comparten el reset de subrayado y la
+// transición de color con el resto de los enlaces del sitio.
+article a,
+footer a{
+    @extend %enlace-limpio;
 }

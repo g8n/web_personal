@@ -7,6 +7,7 @@
 
 @use "../utilities/variables" as *;
 @use "../utilities/mixins" as *;
+@use "../utilities/placeholders" as *;
 
 .carrusel{
 
@@ -24,9 +25,12 @@
         opacity: 0;
         transition: opacity $duracion-lenta $curva;
 
+        // La diapositiva que entra no sólo aparece: sube unos píxeles
+        // mientras lo hace, con los @keyframes propios del sitio.
         &.active{
             visibility: visible;
             opacity: 1;
+            @include animar(subir, $duracion-lenta);
         }
     }
 }
@@ -55,6 +59,7 @@
         border: $borde-ancho solid $color-primario;
         border-radius: $radio-circulo;
         background-color: transparent;
+        background-image: none;
         color: $color-primario;
         text-indent: 0;
         opacity: 1;
@@ -65,17 +70,19 @@
         @include transicion-boton;
 
         &:hover{
-            @include colores-invertidos;
+            @include degradado-oscuro;
+            color: $color-acento;
         }
 
         // La diapositiva en pantalla queda marcada y sin cursor de click.
         &.active{
-            @include colores-invertidos;
+            @include degradado-oscuro;
+            color: $color-acento;
             cursor: default;
         }
 
         &:active{
-            @include colores-realce;
+            @include degradado-acento;
             transform: translateY($desplazamiento-activo);
         }
     }
@@ -85,5 +92,21 @@
     .carrusel-flecha{
         font-size: $fs-flecha;
         line-height: 1;
+    }
+
+    // Son nueve botones: en celulares angostos, a 36px cada uno, ocupaban
+    // tres filas. Achicarlos los deja en dos.
+    @include mobile{
+        gap: $esp-xs;
+
+        [data-bs-target]{
+            width: $tamano-boton-nav-mobile;
+            height: $tamano-boton-nav-mobile;
+            font-size: $fs-pequeno;
+        }
+
+        .carrusel-flecha{
+            font-size: $fs-h4;
+        }
     }
 }

@@ -4,11 +4,22 @@
 
 @use "../utilities/variables" as *;
 @use "../utilities/mixins" as *;
+@use "../utilities/placeholders" as *;
 
 footer{
     @include flex-columna($esp-sm);
     padding: $esp-md;
     margin-top: $esp-md;
+
+    // Mismo recurso que el header, espejado: acá el degradado aclara hacia
+    // abajo, de modo que el pie "cierra" la página.
+    @include degradado(transparent, $color-superficie, to bottom);
+    border-radius: $radio-borde;
+    @include separador(top);
+
+    @include mobile{
+        padding: $esp-sm;
+    }
 
     @include desktop{
         @include contenedor-centrado;
@@ -20,5 +31,45 @@ footer{
         display: flex;
         flex-wrap: wrap;
         gap: $esp-md;
+    }
+
+    // El h2 "Redes sociales" es un título de servicio: no necesita la línea
+    // en degradado, que acá compite con la del borde superior del footer.
+    h2{
+        font-size: $fs-h3;
+
+        &::after{
+            content: none;
+        }
+    }
+
+    // Cada enlace se subraya con una línea lima que crece de izquierda a
+    // derecha al pasar el mouse. Es un ::after escalado en X: en reposo mide
+    // 0 y en hover mide 1, y la transición hace el resto.
+    div ul a{
+        @extend %enlace-limpio;
+        position: relative;
+        color: $color-primario;
+        font-weight: $peso-fuerte;
+
+        &::after{
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -$esp-xs;
+            height: $alto-linea-titulo * 0.5;
+            border-radius: $alto-linea-titulo;
+            @include degradado($grad-acento-desde, $grad-acento-hasta, to right);
+
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform $duracion-lenta $curva;
+        }
+
+        &:hover::after,
+        &:focus-visible::after{
+            transform: scaleX(1);
+        }
     }
 }

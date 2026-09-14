@@ -5,6 +5,11 @@
 // a mano: todos se toman de acá.
 // ==========================================================================
 
+// Los tonos intermedios de los degradados no se escriben a mano: se derivan
+// de la paleta con color.scale(), así la marca sigue cambiando desde un solo
+// lugar.
+@use "sass:color";
+
 // --------------------------------------------------------------------------
 // Paleta cruda
 // --------------------------------------------------------------------------
@@ -14,6 +19,12 @@ $gris-claro: #e5e7eb;
 $gris-medio: #555555;
 $blanco: #ffffff;
 $negro: #000000;
+
+// Derivados: los extremos de los degradados. Un paso más claro y uno más
+// oscuro que el verde de marca, y un gris apenas más claro que el fondo.
+$verde-medio: color.scale($verde-oscuro, $lightness: 16%);
+$verde-profundo: color.scale($verde-oscuro, $lightness: -30%);
+$gris-suave: color.scale($gris-claro, $lightness: 45%);
 
 // --------------------------------------------------------------------------
 // Roles de color: lo que usan los componentes.
@@ -26,6 +37,14 @@ $color-superficie: $blanco;
 $color-texto: $negro;
 $color-texto-suave: $gris-medio;
 $color-texto-invertido: $blanco;
+
+// Los dos extremos de cada degradado, como rol y no como color suelto.
+$grad-oscuro-desde: $verde-medio;
+$grad-oscuro-hasta: $verde-profundo;
+$grad-acento-desde: $color-acento;
+$grad-acento-hasta: color.scale($verde-lima, $lightness: -18%);
+$grad-fondo-desde: $gris-suave;
+$grad-fondo-hasta: $color-fondo;
 
 // --------------------------------------------------------------------------
 // Tipografía
@@ -72,12 +91,19 @@ $ancho-contenido: 1100px;
 $ancho-foto: 300px;
 $tamano-logo: 80px;
 $tamano-boton-nav: 36px;
+$tamano-boton-nav-mobile: 30px;
 $ancho-foco: 0.2rem;
 $desplazamiento-activo: 2px;
 
+// La línea en degradado debajo de cada h2.
+$ancho-linea-titulo: 64px;
+$alto-linea-titulo: 4px;
+
 // --------------------------------------------------------------------------
-// Breakpoints (mobile-first: sólo se usan con min-width)
+// Breakpoints (mobile-first: sólo se usan con min-width, salvo $bp-mobile,
+// que marca el techo de los celulares angostos)
 // --------------------------------------------------------------------------
+$bp-mobile: 480px;
 $bp-tablet: 768px;
 $bp-desktop: 1024px;
 
@@ -88,3 +114,25 @@ $curva: ease-in-out;
 $duracion-rapida: 0.1s;
 $duracion-media: 0.2s;
 $duracion-lenta: 0.3s;
+
+$duracion-entrada: 0.6s;
+$duracion-larga: 0.9s;
+
+// Retardo entre un elemento y el siguiente cuando entran en cascada.
+$retardo-escalonado: 0.12s;
+
+// --------------------------------------------------------------------------
+// Movimiento
+// Los valores de las transformaciones viven acá para que todo el sitio se
+// mueva la misma distancia.
+// --------------------------------------------------------------------------
+$elevacion-hover: -4px;
+$desplazamiento-entrada: 16px;
+$escala-hover: 1.08;
+$angulo-degradado: 135deg;
+
+// --------------------------------------------------------------------------
+// Sombras
+// --------------------------------------------------------------------------
+$sombra-suave: 0 1px 3px rgba($negro, 0.08);
+$sombra-elevada: 0 8px 20px rgba($verde-oscuro, 0.18);

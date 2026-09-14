@@ -4,26 +4,49 @@
 
 @use "../utilities/variables" as *;
 @use "../utilities/mixins" as *;
+@use "../utilities/placeholders" as *;
 
 // Botón de acción: nace oscuro y se invierte al lima en hover.
 // Va después de .dato para ganarle al color de ".dato a" (misma especificidad).
 a.boton{
+    @extend %enlace-limpio;
     display: inline-block;
     align-self: start;
     padding: $esp-sm $esp-md;
     border: $borde-ancho solid $color-primario;
     border-radius: $radio-borde;
-    @include colores-invertidos;
     font-weight: $peso-fuerte;
-    @include transicion-boton;
 
-    &:hover{
-        @include colores-realce;
+    // De base, degradado oscuro con el texto en lima.
+    @include degradado-oscuro;
+    color: $color-acento;
+
+    // La transición incluye box-shadow porque el hover ahora también levanta
+    // el botón, no sólo le cambia el color.
+    transition: color $duracion-media $curva,
+                background-color $duracion-media $curva,
+                box-shadow $duracion-media $curva,
+                transform $duracion-rapida $curva;
+
+    // Al pasar el mouse se invierte al lima y se despega de la página.
+    &:hover,
+    &:focus-visible{
+        @include degradado-acento;
+        @include elevacion($elevacion-hover * 0.5);
     }
 
     // Al click, además del cambio de color, se hunde un par de píxeles.
     &:active{
-        @include colores-realce;
+        @include degradado-acento;
         transform: translateY($desplazamiento-activo);
+        box-shadow: none;
+    }
+
+    // Los botones con un email o un teléfono largo desbordaban la tarjeta en
+    // pantallas angostas: acá se permite el corte.
+    @include mobile{
+        align-self: stretch;
+        text-align: center;
+        overflow-wrap: anywhere;
     }
 }

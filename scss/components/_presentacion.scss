@@ -24,6 +24,25 @@
         @include flex-columna($esp-sm);
     }
 
+    // La foto entra desde la izquierda con los @keyframes propios del sitio.
+    // Acá no se usa Animate.css a propósito: si el mismo elemento llevara una
+    // clase animate__ y una animation propia, la segunda pisaría a la primera.
+    img{
+        @include animar(entrar-izquierda, $duracion-larga);
+        border-radius: $radio-borde;
+        box-shadow: $sombra-suave;
+        transition: transform $duracion-lenta $curva,
+                    box-shadow $duracion-lenta $curva;
+    }
+
+    figure:hover img{
+        @include elevacion;
+    }
+
+    figcaption{
+        @include animar(aparecer, $duracion-larga, $retardo-escalonado * 3);
+    }
+
     article{
         grid-area: texto;
         @include flex-columna($esp-md);
@@ -33,6 +52,15 @@
         width: 100%;
         max-width: $ancho-foto;
         height: auto;
+    }
+
+    // En celulares angostos la foto se centra en vez de quedar pegada al
+    // borde izquierdo con un hueco a la derecha.
+    @include mobile{
+        figure{
+            align-items: center;
+            text-align: center;
+        }
     }
 
     // El título ocupa el ancho completo y debajo se reparten foto y texto.
