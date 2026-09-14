@@ -6,9 +6,15 @@
 
 @use "../utilities/variables" as *;
 @use "../utilities/mixins" as *;
+@use "../utilities/placeholders" as *;
 
 .proyecto{
-    @include tarjeta($gap: $esp-md);
+    @extend %superficie-tarjeta;
+    @extend %tarjeta-interactiva;
+
+    // El único de los cuatro que necesita más aire entre bloques: el resto
+    // de la superficie es idéntica y viene del placeholder.
+    gap: $esp-md;
 
     // Logo a la izquierda, nombre y rubro a la derecha.
     .proyecto-encabezado{
@@ -16,11 +22,25 @@
         align-items: center;
         gap: $esp-md;
         @include separador(bottom);
+
+        // En celulares angostos el nombre largo de una empresa al lado del
+        // logo de 80px deja el texto en una columna de pocos caracteres:
+        // mejor apilarlos.
+        @include mobile{
+            flex-direction: column;
+            align-items: flex-start;
+            gap: $esp-sm;
+        }
     }
 
     .logo{
         flex: 0 0 auto;
         @include logo-empresa;
+        transition: transform $duracion-lenta $curva;
+    }
+
+    &:hover .logo{
+        transform: scale($escala-hover);
     }
 
     h3{
@@ -40,13 +60,13 @@
     }
 
     // La etapa del negocio ubica al lector: va resaltada en negativo.
+    // Forma y tipografía salen del placeholder que comparte con .keywords li;
+    // acá sólo se define el color.
     .etapa{
+        @extend %pildora;
         align-self: start;
-        padding: $esp-xs $esp-sm;
-        border-radius: $radio-borde;
-        @include colores-invertidos;
-        font-weight: $peso-fuerte;
-        font-size: $fs-pequeno;
+        @include degradado-oscuro(to right);
+        color: $color-acento;
     }
 
     .bloque{
@@ -66,12 +86,15 @@
         @include separador(top);
 
         li{
-            padding: $esp-xs $esp-sm;
+            @extend %pildora;
             border: $borde-ancho solid $color-primario;
-            border-radius: $radio-borde;
-            font-size: $fs-pequeno;
-            font-weight: $peso-fuerte;
             color: $color-primario;
+            @include transicion-colores;
+
+            // Cada etiqueta se invierte al lima al pasar el mouse.
+            &:hover{
+                @include degradado-acento(to right);
+            }
         }
     }
 }

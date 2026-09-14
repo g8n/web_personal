@@ -1,4 +1,42 @@
 @charset "UTF-8";
+.proyecto, .servicio, .dato, .experiencia {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.proyecto, .servicio, .dato {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.proyecto:hover, .servicio:hover, .dato:hover, .proyecto:focus-within, .servicio:focus-within, .dato:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(21, 49, 49, 0.18);
+}
+
+.proyecto .etapa, .proyecto .keywords li {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+a.boton, .dato a, footer div ul a, header .nav-link, article a,
+footer a {
+  text-decoration: none;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #153131;
+  outline-offset: 5px;
+}
+
 /*! ==========================================================================
  * style.css — ARCHIVO GENERADO. No editar a mano.
  * Se compila desde scss/main.scss con: sass scss/main.scss css/style.css
@@ -14,8 +52,21 @@ body {
   font-size: 16px;
   font-weight: 400;
   color: #000000;
-  background-color: #e5e7eb;
   padding: 20px;
+  background-color: #e5e7eb;
+  background-image: linear-gradient(to bottom, rgb(94.3921568627%, 94.8235294118%, 95.6862745098%), #e5e7eb);
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 main {
@@ -35,6 +86,11 @@ section {
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+}
+@media (max-width: 480px) {
+  section {
+    padding: 10px 0;
+  }
 }
 section ul {
   display: flex;
@@ -61,6 +117,22 @@ h2 {
   font-size: 32px;
   color: #153131;
 }
+h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  max-width: 100%;
+  height: 4px;
+  margin-top: 5px;
+  border-radius: 4px;
+  background-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%));
+  transform-origin: left;
+  animation-name: crecer-linea;
+  animation-duration: 0.3s;
+  animation-delay: 0.12s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
 @media (min-width: 1024px) {
   h2 {
     font-size: 40px;
@@ -73,17 +145,77 @@ figcaption {
 }
 
 article p em {
-  background-color: #153131;
+  padding: 0 5px;
+  border-radius: 8px;
+  background-image: linear-gradient(to right, rgb(16.5176470588%, 38.5411764706%, 38.5411764706%), rgb(5.7647058824%, 13.4509803922%, 13.4509803922%));
+  color: #ffffff;
   color: #cdfe00;
+  font-style: normal;
 }
 
 .Destacado {
   font-weight: bold;
 }
 
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes entrar-izquierda {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes crecer-linea {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 header {
   padding: 20px;
   margin-bottom: 20px;
+  background-image: linear-gradient(to bottom, #ffffff, transparent);
+  border-radius: 8px;
+  border-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%) 40%, transparent) 1;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #cdfe00;
+}
+@media (max-width: 480px) {
+  header {
+    padding: 10px;
+  }
 }
 @media (min-width: 1024px) {
   header {
@@ -107,12 +239,20 @@ header .navbar > .container-fluid {
 header .navbar-brand h1 {
   margin: 0;
 }
+header .navbar-brand h1::after {
+  content: none;
+}
+@media (max-width: 480px) {
+  header .navbar-brand h1 {
+    font-size: 32px;
+  }
+}
 header .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23153131' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 header .nav-link {
-  text-decoration: none;
-  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  border-radius: 8px;
+  padding-inline: 10px;
 }
 header .navbar-nav {
   gap: 12px;
@@ -123,14 +263,70 @@ header .navbar-nav {
   }
 }
 header .navbar-nav .nav-link:hover, header .navbar-nav .nav-link:focus {
-  background-color: #153131;
+  background-image: linear-gradient(to right, rgb(16.5176470588%, 38.5411764706%, 38.5411764706%), rgb(5.7647058824%, 13.4509803922%, 13.4509803922%));
+  color: #ffffff;
   color: #cdfe00;
+}
+header .navbar-nav .nav-link.active {
+  border-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%) 40%, transparent) 1;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #cdfe00;
+  padding-bottom: 5px;
 }
 
 .servicios {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 20px;
+}
+.servicios .servicio:nth-child(1) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.12s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.servicios .servicio:nth-child(2) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.24s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.servicios .servicio:nth-child(3) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.36s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.servicios .servicio:nth-child(4) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.48s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.servicios .servicio:nth-child(5) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.6s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.servicios .servicio:nth-child(6) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.72s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.servicios .servicio:nth-child(7) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.84s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
 }
 @media (min-width: 768px) {
   .servicios {
@@ -146,6 +342,55 @@ header .navbar-nav .nav-link:hover, header .navbar-nav .nav-link:focus {
   grid-template-columns: repeat(1, 1fr);
   gap: 20px;
 }
+.proyectos .proyecto:nth-child(1) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.12s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.proyectos .proyecto:nth-child(2) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.24s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.proyectos .proyecto:nth-child(3) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.36s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.proyectos .proyecto:nth-child(4) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.48s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.proyectos .proyecto:nth-child(5) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.6s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.proyectos .proyecto:nth-child(6) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.72s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.proyectos .proyecto:nth-child(7) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.84s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
 @media (min-width: 1024px) {
   .proyectos {
     grid-template-columns: repeat(2, 1fr);
@@ -157,6 +402,55 @@ header .navbar-nav .nav-link:hover, header .navbar-nav .nav-link:focus {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 20px;
+}
+.datos-contacto .dato:nth-child(1) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.12s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.datos-contacto .dato:nth-child(2) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.24s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.datos-contacto .dato:nth-child(3) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.36s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.datos-contacto .dato:nth-child(4) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.48s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.datos-contacto .dato:nth-child(5) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.6s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.datos-contacto .dato:nth-child(6) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.72s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
+.datos-contacto .dato:nth-child(7) {
+  animation-name: subir;
+  animation-duration: 0.6s;
+  animation-delay: 0.84s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
 }
 @media (min-width: 768px) {
   .datos-contacto {
@@ -175,6 +469,16 @@ footer {
   gap: 10px;
   padding: 20px;
   margin-top: 20px;
+  background-image: linear-gradient(to bottom, transparent, #ffffff);
+  border-radius: 8px;
+  border-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%) 40%, transparent) 1;
+  padding-top: 10px;
+  border-top: 2px solid #cdfe00;
+}
+@media (max-width: 480px) {
+  footer {
+    padding: 10px;
+  }
 }
 @media (min-width: 1024px) {
   footer {
@@ -188,15 +492,34 @@ footer div ul {
   flex-wrap: wrap;
   gap: 20px;
 }
-
-.servicio {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
+footer h2 {
+  font-size: 24px;
 }
+footer h2::after {
+  content: none;
+}
+footer div ul a {
+  position: relative;
+  color: #153131;
+  font-weight: bold;
+}
+footer div ul a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 2px;
+  border-radius: 4px;
+  background-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+footer div ul a:hover::after, footer div ul a:focus-visible::after {
+  transform: scaleX(1);
+}
+
 .servicio h3 {
   font-family: "Bebas Neue", "Helvetica Neue";
   font-weight: 400;
@@ -209,30 +532,16 @@ footer div ul {
   }
 }
 .servicio .Destacado {
+  border-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%) 40%, transparent) 1;
   padding-bottom: 10px;
   border-bottom: 2px solid #cdfe00;
 }
 
-.dato {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-}
 .dato a {
-  text-decoration: none;
   color: #153131;
 }
 
 .experiencia {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
   height: 100%;
 }
 .experiencia .logo {
@@ -240,6 +549,10 @@ footer div ul {
   height: 80px;
   object-fit: contain;
   border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+.experiencia:hover .logo {
+  transform: scale(1.08);
 }
 .experiencia .empresa {
   font-weight: bold;
@@ -256,7 +569,9 @@ footer div ul {
   padding: 20px;
   background-color: #153131;
   border-radius: 8px;
+  background-image: linear-gradient(135deg, rgb(16.5176470588%, 38.5411764706%, 38.5411764706%), rgb(5.7647058824%, 13.4509803922%, 13.4509803922%));
   color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 .como-trabajo h2 {
   color: #cdfe00;
@@ -268,19 +583,30 @@ a.boton {
   padding: 10px 20px;
   border: 2px solid #153131;
   border-radius: 8px;
-  background-color: #153131;
-  color: #cdfe00;
   font-weight: bold;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  background-image: linear-gradient(135deg, rgb(16.5176470588%, 38.5411764706%, 38.5411764706%), rgb(5.7647058824%, 13.4509803922%, 13.4509803922%));
+  color: #ffffff;
+  color: #cdfe00;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease-in-out;
 }
-a.boton:hover {
-  background-color: #cdfe00;
+a.boton:hover, a.boton:focus-visible {
+  background-image: linear-gradient(135deg, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%));
   color: #153131;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(21, 49, 49, 0.18);
 }
 a.boton:active {
-  background-color: #cdfe00;
+  background-image: linear-gradient(135deg, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%));
   color: #153131;
   transform: translateY(2px);
+  box-shadow: none;
+}
+@media (max-width: 480px) {
+  a.boton {
+    align-self: stretch;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
 }
 
 .presentacion {
@@ -297,6 +623,27 @@ a.boton:active {
   flex-direction: column;
   gap: 10px;
 }
+.presentacion img {
+  animation-name: entrar-izquierda;
+  animation-duration: 0.9s;
+  animation-delay: 0s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.presentacion figure:hover img {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(21, 49, 49, 0.18);
+}
+.presentacion figcaption {
+  animation-name: aparecer;
+  animation-duration: 0.9s;
+  animation-delay: 0.36s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+}
 .presentacion article {
   grid-area: texto;
   display: flex;
@@ -308,6 +655,12 @@ a.boton:active {
   max-width: 300px;
   height: auto;
 }
+@media (max-width: 480px) {
+  .presentacion figure {
+    align-items: center;
+    text-align: center;
+  }
+}
 @media (min-width: 1024px) {
   .presentacion {
     grid-template-columns: auto 1fr;
@@ -317,19 +670,22 @@ a.boton:active {
 }
 
 .proyecto {
-  display: flex;
-  flex-direction: column;
   gap: 20px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
 }
 .proyecto .proyecto-encabezado {
   display: flex;
   align-items: center;
   gap: 20px;
+  border-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%) 40%, transparent) 1;
   padding-bottom: 10px;
   border-bottom: 2px solid #cdfe00;
+}
+@media (max-width: 480px) {
+  .proyecto .proyecto-encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 }
 .proyecto .logo {
   flex: 0 0 auto;
@@ -337,6 +693,10 @@ a.boton:active {
   height: 80px;
   object-fit: contain;
   border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+.proyecto:hover .logo {
+  transform: scale(1.08);
 }
 .proyecto h3 {
   font-family: "Bebas Neue", "Helvetica Neue";
@@ -361,12 +721,9 @@ a.boton:active {
 }
 .proyecto .etapa {
   align-self: start;
-  padding: 5px 10px;
-  border-radius: 8px;
-  background-color: #153131;
+  background-image: linear-gradient(to right, rgb(16.5176470588%, 38.5411764706%, 38.5411764706%), rgb(5.7647058824%, 13.4509803922%, 13.4509803922%));
+  color: #ffffff;
   color: #cdfe00;
-  font-weight: bold;
-  font-size: 14px;
 }
 .proyecto .bloque {
   display: flex;
@@ -381,15 +738,17 @@ a.boton:active {
   gap: 10px;
   margin-top: auto;
   padding-left: 0;
+  border-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%) 40%, transparent) 1;
   padding-top: 10px;
   border-top: 2px solid #cdfe00;
 }
 .proyecto .keywords li {
-  padding: 5px 10px;
   border: 2px solid #153131;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: bold;
+  color: #153131;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.proyecto .keywords li:hover {
+  background-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%));
   color: #153131;
 }
 
@@ -408,6 +767,11 @@ a.boton:active {
 .carrusel .carousel-item.active {
   visibility: visible;
   opacity: 1;
+  animation-name: subir;
+  animation-duration: 0.3s;
+  animation-delay: 0s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
 }
 
 .carrusel-nav {
@@ -432,6 +796,7 @@ a.boton:active {
   border: 2px solid #153131;
   border-radius: 50%;
   background-color: transparent;
+  background-image: none;
   color: #153131;
   text-indent: 0;
   opacity: 1;
@@ -442,20 +807,35 @@ a.boton:active {
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.1s ease-in-out;
 }
 .carrusel-nav [data-bs-target]:hover {
-  background-color: #153131;
+  background-image: linear-gradient(135deg, rgb(16.5176470588%, 38.5411764706%, 38.5411764706%), rgb(5.7647058824%, 13.4509803922%, 13.4509803922%));
+  color: #ffffff;
   color: #cdfe00;
 }
 .carrusel-nav [data-bs-target].active {
-  background-color: #153131;
+  background-image: linear-gradient(135deg, rgb(16.5176470588%, 38.5411764706%, 38.5411764706%), rgb(5.7647058824%, 13.4509803922%, 13.4509803922%));
+  color: #ffffff;
   color: #cdfe00;
   cursor: default;
 }
 .carrusel-nav [data-bs-target]:active {
-  background-color: #cdfe00;
+  background-image: linear-gradient(135deg, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%));
   color: #153131;
   transform: translateY(2px);
 }
 .carrusel-nav .carrusel-flecha {
   font-size: 26px;
   line-height: 1;
+}
+@media (max-width: 480px) {
+  .carrusel-nav {
+    gap: 5px;
+  }
+  .carrusel-nav [data-bs-target] {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  .carrusel-nav .carrusel-flecha {
+    font-size: 20px;
+  }
 }

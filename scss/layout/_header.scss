@@ -10,6 +10,19 @@ header{
     padding: $esp-md;
     margin-bottom: $esp-md;
 
+    // Degradado apenas perceptible: aclara arriba y se funde con el fondo de
+    // la página abajo. Da profundidad sin leerse como una barra de color.
+    @include degradado($color-superficie, transparent, to bottom);
+    border-radius: $radio-borde;
+
+    // La misma línea lima en degradado que separa el encabezado de una
+    // tarjeta, acá separando el header del cuerpo de la página.
+    @include separador(bottom);
+
+    @include mobile{
+        padding: $esp-sm;
+    }
+
     // Mismo ancho que main y footer, para que los márgenes laterales alineen.
     @include desktop{
         @include contenedor-centrado;

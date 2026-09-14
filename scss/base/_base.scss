@@ -15,6 +15,7 @@
 
 @use "../utilities/variables" as *;
 @use "../utilities/mixins" as *;
+@use "../utilities/placeholders" as *;
 
 *{
     margin: 0;
@@ -27,8 +28,35 @@ body{
     font-size: $fs-base;
     font-weight: $peso-normal;
     color: $color-texto;
-    background-color: $color-fondo;
     padding: $esp-md;
+
+    // Degradado vertical muy suave: aclara arriba y vuelve al gris del fondo.
+    // El background-color queda de respaldo por si el degradado no carga.
+    background-color: $color-fondo;
+    @include degradado($grad-fondo-desde, $grad-fondo-hasta, to bottom);
+
+    // Sin esto el degradado se corta donde termina el contenido y las páginas
+    // cortas muestran una franja de color plano abajo.
+    min-height: 100vh;
+    background-attachment: fixed;
+
+    // En celulares angostos 20px de padding a cada lado se comen la pantalla.
+    @include mobile{
+        padding: $esp-sm;
+    }
+}
+
+// Ninguna imagen puede desbordar a su contenedor: es la regla que sostiene
+// la responsividad de las fotos y los logos.
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+// Un único anillo de foco para todo lo que se navega con teclado.
+a,
+button{
+    @extend %foco-visible;
 }
 
 // Contenedor de las secciones de contenido.
@@ -44,6 +72,10 @@ main{
 section{
     @include flex-columna($esp-md);
     padding: $esp-md;
+
+    @include mobile{
+        padding: $esp-sm 0;
+    }
 
     // Habilidades y demás listas de contenido, separadas de forma uniforme.
     ul{

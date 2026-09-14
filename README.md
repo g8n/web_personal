@@ -4,9 +4,9 @@ Sitio web personal estático que funciona como carta de presentación profesiona
 quién soy, mi recorrido laboral, los servicios que ofrezco, proyectos y formas de
 contacto.
 
-Está construido con **HTML5, SCSS y Bootstrap 5**, sin frameworks de JavaScript.
-Los estilos se escriben en SCSS y se compilan a un único `css/style.css`; el HTML
-se abre directamente en el navegador.
+Está construido con **HTML5, SCSS, Bootstrap 5 y Animate.css**. 
+Los estilos se escriben en SCSS y se compilan a un único
+`css/style.css`; el HTML se abre directamente en el navegador.
 
 🔗 **Sitio publicado:** <https://g8n.github.io/web_personal/>
 
@@ -31,11 +31,15 @@ redes sociales y datos de contacto.
 ├── scss/                   # Código fuente de los estilos
 │   ├── main.scss           # Único punto de entrada (@use)
 │   ├── utilities/          # No generan CSS: alimentan al resto
-│   │   ├── _variables.scss # Colores, tipografía, espaciado, breakpoints
-│   │   └── _mixins.scss    # Media queries, tarjetas, títulos, botones
+│   │   ├── _variables.scss # Colores, degradados, tipografía, espaciado,
+│   │   │                   # breakpoints, duraciones y sombras
+│   │   ├── _mixins.scss    # Media queries, tarjetas, títulos, degradados,
+│   │   │                   # elevación y animación
+│   │   └── _placeholders.scss # Bloques compartidos con @extend
 │   ├── base/
 │   │   ├── _base.scss      # Reset y etiquetas globales
-│   │   └── _tipografia.scss# Jerarquía de títulos y énfasis
+│   │   ├── _tipografia.scss# Jerarquía de títulos y énfasis
+│   │   └── _animaciones.scss # @keyframes propios + movimiento reducido
 │   ├── layout/
 │   │   ├── _header.scss
 │   │   ├── _nav.scss       # Navbar de Bootstrap personalizado
@@ -75,6 +79,24 @@ Para compilar alcanza con cualquiera de estas dos opciones:
 sass scss/main.scss css/style.css              # compila una vez
 sass --watch scss/main.scss css/style.css      # recompila al guardar
 ```
+
+### Mixin o extend
+
+La regla para elegir entre las dos herramientas:
+
+| Herramienta | Cuándo | Qué genera |
+|---|---|---|
+| `@mixin` | cada uso necesita **valores distintos** | repite el bloque en cada llamada |
+| `@extend` | el bloque es **idéntico** en todos lados | lo emite una vez y agrupa los selectores |
+
+### Animaciones
+
+El trabajo está repartido en dos:
+
+- **Animate.css** (CDN) hace la **entrada** de la página:
+  `header`, la primera sección y el `footer` llevan clases `animate__` en el
+  HTML.
+- **`base/_animaciones.scss`** hace todo lo demás
 
 Tres reglas para mantener la arquitectura sana:
 

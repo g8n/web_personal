@@ -10,14 +10,19 @@
 // "a.boton" le gane al de ".dato a".
 // ==========================================================================
 
-// 1. Utilidades: variables y mixins. No generan CSS por sí solas; cada
-//    partial las vuelve a cargar con @use donde las necesita.
+// 1. Utilidades: variables, mixins y placeholders. No generan CSS por sí
+//    solas; cada partial las vuelve a cargar con @use donde las necesita.
+//    Los placeholders son la excepción parcial: no emiten nada mientras nadie
+//    los extienda, pero cuando alguien lo hace, el bloque compartido sale en
+//    ESTE punto del archivo final (la posición del %, no la del @extend).
 @use "utilities/variables" as *;
 @use "utilities/mixins" as *;
+@use "utilities/placeholders" as *;
 
-// 2. Base: reset y etiquetas globales.
+// 2. Base: reset, etiquetas globales y los @keyframes del sitio.
 @use "base/base";
 @use "base/tipografia";
+@use "base/animaciones";
 
 // 3. Layout: las grandes zonas de la página.
 @use "layout/header";

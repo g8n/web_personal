@@ -1,0 +1,73 @@
+// ==========================================================================
+// ANIMACIONES
+// Los @keyframes propios del sitio, todos en un solo lugar.
+//
+// Reparto de trabajo con Animate.css:
+//   - Animate.css  -> la ENTRADA de la página (clases en el HTML).
+//   - este archivo -> lo que pasa DESPUÉS: hover, foco, subrayados.
+//
+// Se disparan con el mixin animar($nombre, $duracion, $retardo) de
+// utilities/_mixins.scss.
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+// Entrada desde abajo: el elemento sube su distancia mientras aparece.
+@keyframes subir {
+    from {
+        opacity: 0;
+        transform: translateY($desplazamiento-entrada);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Entrada lateral, para lo que entra desde el costado (la foto de portada).
+@keyframes entrar-izquierda {
+    from {
+        opacity: 0;
+        transform: translateX(-$desplazamiento-entrada);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+// Aparición pura, sin desplazamiento.
+@keyframes aparecer {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+// La línea lima que se dibuja sola de izquierda a derecha.
+// transform-origin: left es lo que hace que crezca desde el borde izquierdo
+// en lugar de expandirse desde el centro.
+@keyframes crecer-linea {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+// --------------------------------------------------------------------------
+// Preferencia de movimiento reducido
+// El sistema operativo permite pedir "menos animaciones" (por mareo o
+// sensibilidad visual). Cuando esa preferencia está activa apagamos todo:
+// lo propio y también lo que inyecta Animate.css.
+//
+// Las animaciones no se ponen en 0s sino en 0.01ms: así siguen existiendo y
+// disparando sus eventos, pero nadie las ve.
+// --------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

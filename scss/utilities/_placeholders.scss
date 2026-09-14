@@ -1,0 +1,84 @@
+// ==========================================================================
+// PLACEHOLDERS
+// Los bloques que varios componentes comparten *palabra por palabra*.
+//
+// El criterio para elegir entre las dos herramientas:
+//
+//   @mixin   cuando cada uso necesita valores distintos. Genera el bloque de
+//            nuevo en cada llamada, que es el precio de poder parametrizarlo.
+//   @extend  cuando el bloque es idéntico en todos lados. Sass emite las
+//            declaraciones UNA sola vez y agrupa los selectores que las piden.
+//
+// El caso más claro es la tarjeta: cuatro componentes la usaban con
+// @include tarjeta(), y las mismas cuatro declaraciones salían repetidas
+// cuatro veces en style.css. Con @extend salen una vez, en un selector
+// agrupado: ".servicio, .dato, .experiencia, .proyecto { ... }".
+//
+// Un placeholder (%) no genera CSS por sí solo: si nadie lo extiende,
+// desaparece de la salida.
+// ==========================================================================
+
+@use "variables" as *;
+@use "mixins" as *;
+
+// --------------------------------------------------------------------------
+// Superficies
+// --------------------------------------------------------------------------
+
+// La caja blanca con padding y esquinas redondeadas. El gap de $esp-sm es el
+// que usan tres de los cuatro componentes; el cuarto (.proyecto) lo pisa.
+%superficie-tarjeta {
+    @include flex-columna($esp-sm);
+    padding: $esp-md;
+    background-color: $color-superficie;
+    border-radius: $radio-borde;
+    box-shadow: $sombra-suave;
+}
+
+// La tarjeta que reacciona al mouse: se levanta y gana sombra.
+// La transición se declara acá (en el estado de reposo) y no en el :hover,
+// para que la animación también corra cuando el mouse se va.
+%tarjeta-interactiva {
+    transition: transform $duracion-lenta $curva,
+                box-shadow $duracion-lenta $curva;
+
+    &:hover,
+    &:focus-within {
+        @include elevacion;
+    }
+}
+
+// --------------------------------------------------------------------------
+// Piezas chicas
+// --------------------------------------------------------------------------
+
+// La cajita redondeada de texto corto: la etapa del proyecto y cada
+// etiqueta #keyword. Comparten forma y tipografía; los colores los pone
+// cada una por su cuenta.
+%pildora {
+    padding: $esp-xs $esp-sm;
+    border-radius: $radio-borde;
+    font-size: $fs-pequeno;
+    font-weight: $peso-fuerte;
+    line-height: 1.4;
+}
+
+// Todo enlace del sitio: sin subrayado del navegador y con la transición de
+// color ya puesta.
+%enlace-limpio {
+    text-decoration: none;
+    @include transicion-colores;
+}
+
+// --------------------------------------------------------------------------
+// Accesibilidad
+// --------------------------------------------------------------------------
+
+// Un solo anillo de foco para todo lo que se puede tabular. :focus-visible
+// (y no :focus) lo muestra sólo a quien navega con teclado.
+%foco-visible {
+    &:focus-visible {
+        outline: $borde-ancho solid $color-primario;
+        outline-offset: $esp-xs;
+    }
+}

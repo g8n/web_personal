@@ -11,6 +11,14 @@
 // Al ser mixins con @content se pueden anidar dentro del propio selector,
 // que es lo que mantiene junto el estilo mobile y su override de desktop.
 // --------------------------------------------------------------------------
+// Único que va con max-width: no describe "de acá para arriba" sino el caso
+// puntual del celular angosto, donde el padding de 20px se come la pantalla.
+@mixin mobile {
+    @media (max-width: $bp-mobile) {
+        @content;
+    }
+}
+
 @mixin tablet {
     @media (min-width: $bp-tablet) {
         @content;
@@ -60,7 +68,17 @@
 }
 
 // La línea lima que separa el encabezado (o el pie) de una tarjeta.
+// El borde se pinta con un degradado (border-image) en vez de un color plano:
+// arranca lima y se apaga hacia la derecha. Como sólo un lado tiene ancho,
+// border-image pinta únicamente ese lado.
 @mixin separador($lado: bottom) {
+    border-image: linear-gradient(
+        to right,
+        $grad-acento-desde,
+        $grad-acento-hasta 40%,
+        transparent
+    ) 1;
+
     @if $lado == bottom {
         padding-bottom: $esp-sm;
         border-bottom: $borde-ancho solid $color-acento;
@@ -100,8 +118,36 @@
 }
 
 // --------------------------------------------------------------------------
+// Degradados
+// --------------------------------------------------------------------------
+
+// Degradado lineal genérico. El ángulo tiene default para que la mayoría de
+// las llamadas sean de dos argumentos.
+@mixin degradado($desde, $hasta, $angulo: $angulo-degradado) {
+    background-image: linear-gradient($angulo, $desde, $hasta);
+}
+
+// Las dos combinaciones que usa la marca, ya resueltas.
+@mixin degradado-oscuro($angulo: $angulo-degradado) {
+    @include degradado($grad-oscuro-desde, $grad-oscuro-hasta, $angulo);
+    color: $color-texto-invertido;
+}
+
+@mixin degradado-acento($angulo: $angulo-degradado) {
+    @include degradado($grad-acento-desde, $grad-acento-hasta, $angulo);
+    color: $color-primario;
+}
+
+// --------------------------------------------------------------------------
 // Interacción
 // --------------------------------------------------------------------------
+
+// Levantar un elemento al pasar el mouse. La distancia y la sombra salen de
+// variables para que todas las tarjetas se muevan igual.
+@mixin elevacion($distancia: $elevacion-hover, $sombra: $sombra-elevada) {
+    transform: translateY($distancia);
+    box-shadow: $sombra;
+}
 
 // Transición de colores para links y navegación.
 @mixin transicion-colores {
@@ -132,4 +178,32 @@
 @mixin metadato {
     font-size: $fs-pequeno;
     color: $color-texto-suave;
+}
+
+// --------------------------------------------------------------------------
+// Animación
+// Atajo para no repetir las seis propiedades de animation en cada uso.
+// Los @keyframes viven en base/_animaciones.scss.
+// --------------------------------------------------------------------------
+// El cuarto parámetro casi nunca se toca; está para el caso raro de una
+// animación que NO termine en el estado natural del elemento, que es la única
+// que necesita "forwards".
+@mixin animar($nombre, $duracion: $duracion-entrada, $retardo: 0s, $relleno: backwards) {
+    animation-name: $nombre;
+    animation-duration: $duracion;
+    animation-delay: $retardo;
+    animation-timing-function: $curva;
+
+    // "backwards" mantiene el PRIMER fotograma durante el retardo: sin esto,
+    // un elemento con delay se ve un instante en su posición final y recién
+    // ahí salta al inicio de la animación.
+    //
+    // Y es "backwards" y no "both" por un motivo concreto: "both" también
+    // retiene el ÚLTIMO fotograma para siempre, y en la cascada de CSS una
+    // animación le gana a una declaración normal. Con "both", el
+    // transform: translateY(0) del final de "subir" se quedaba pegado y
+    // anulaba el translateY del :hover de las tarjetas: la sombra aparecía
+    // pero la tarjeta no se levantaba. Estas animaciones terminan en el
+    // estado natural del elemento, así que no hay nada que retener.
+    animation-fill-mode: $relleno;
 }

@@ -7,6 +7,7 @@
 @use "sass:string";
 @use "../utilities/variables" as *;
 @use "../utilities/mixins" as *;
+@use "../utilities/placeholders" as *;
 
 // El ícono de la hamburguesa viaja como SVG embebido en una URL, así que el
 // color hay que interpolarlo sin el "#" y escapado como %23.
@@ -33,6 +34,18 @@ header{
     // El título hace de "marca" del navbar.
     .navbar-brand h1{
         margin: 0;
+
+        // El h1 del header no lleva la línea en degradado: ahí abajo está la
+        // del propio header y quedarían dos líneas pegadas.
+        &::after{
+            content: none;
+        }
+
+        // En celulares angostos el h1 de 36px compite por el ancho con el
+        // botón hamburguesa y lo empuja fuera de la pantalla.
+        @include mobile{
+            font-size: $fs-h2;
+        }
     }
 
     .navbar-toggler-icon{
@@ -40,8 +53,9 @@ header{
     }
 
     .nav-link{
-        text-decoration: none;
-        @include transicion-colores;
+        @extend %enlace-limpio;
+        border-radius: $radio-borde;
+        padding-inline: $esp-sm;
     }
 
     .navbar-nav{
@@ -55,8 +69,16 @@ header{
         .nav-link{
             &:hover,
             &:focus{
-                @include colores-invertidos;
+                @include degradado-oscuro(to right);
+                color: $color-acento;
             }
+        }
+
+        // La página en la que estás parado queda marcada con la línea lima
+        // debajo, en lugar de sólo con un color distinto.
+        .nav-link.active{
+            @include separador(bottom);
+            padding-bottom: $esp-xs;
         }
     }
 }
