@@ -8,7 +8,7 @@ Está construido con **HTML5, SCSS, Bootstrap 5 y Animate.css**.
 Los estilos se escriben en SCSS y se compilan a un único
 `css/style.css`; el HTML se abre directamente en el navegador.
 
-🔗 **Sitio publicado:** <https://g8n.github.io/web_personal/>
+🔗 **Sitio publicado en Vercel:** <https://web-personal-henna-ten.vercel.app/>
 
 ## Contenido del sitio
 
@@ -116,7 +116,7 @@ el estilo de un componente y sus overrides queden juntos.
 
 El sitio está publicado con **GitHub Pages** en:
 
-<https://g8n.github.io/web_personal/>
+<https://web-personal-henna-ten.vercel.app/>
 
 Cada `git push` a `main` republica el sitio automáticamente.
 
