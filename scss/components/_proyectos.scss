@@ -1,0 +1,77 @@
+// ==========================================================================
+// PROYECTOS
+// Tarjeta de proyecto: encabezado con logo, etapa del negocio, bloques de
+// texto y las habilidades aplicadas como etiquetas al pie.
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+.proyecto{
+    @include tarjeta($gap: $esp-md);
+
+    // Logo a la izquierda, nombre y rubro a la derecha.
+    .proyecto-encabezado{
+        display: flex;
+        align-items: center;
+        gap: $esp-md;
+        @include separador(bottom);
+    }
+
+    .logo{
+        flex: 0 0 auto;
+        @include logo-empresa;
+    }
+
+    h3{
+        @include titulo($fs-h3);
+
+        @include desktop{
+            font-size: $fs-h3-desktop;
+        }
+    }
+
+    h4{
+        @include titulo($fs-h4);
+    }
+
+    .rubro{
+        @include metadato;
+    }
+
+    // La etapa del negocio ubica al lector: va resaltada en negativo.
+    .etapa{
+        align-self: start;
+        padding: $esp-xs $esp-sm;
+        border-radius: $radio-borde;
+        @include colores-invertidos;
+        font-weight: $peso-fuerte;
+        font-size: $fs-pequeno;
+    }
+
+    .bloque{
+        @include flex-columna($esp-sm);
+    }
+
+    // Etiquetas al pie: margin-top auto las empuja abajo para que las
+    // tarjetas de una misma fila terminen alineadas.
+    .keywords{
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: $esp-sm;
+        margin-top: auto;
+        padding-left: 0;
+        @include separador(top);
+
+        li{
+            padding: $esp-xs $esp-sm;
+            border: $borde-ancho solid $color-primario;
+            border-radius: $radio-borde;
+            font-size: $fs-pequeno;
+            font-weight: $peso-fuerte;
+            color: $color-primario;
+        }
+    }
+}

@@ -1,0 +1,53 @@
+// ==========================================================================
+// BASE
+// Reset y estilos globales de etiquetas. Mobile-first: sin media queries
+// todo queda apilado y al 100% del ancho.
+// ==========================================================================
+
+// Comentario "fuerte" (/* */): es el único que Sass copia al CSS final.
+// Va acá y no en main.scss porque el CSS de los módulos cargados con @use se
+// emite antes que el del archivo que los carga, y este es el primer partial
+// de la cadena que genera reglas.
+/*! ==========================================================================
+ * style.css — ARCHIVO GENERADO. No editar a mano.
+ * Se compila desde scss/main.scss con: sass scss/main.scss css/style.css
+ * ========================================================================== */
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: $fuente-base;
+    font-size: $fs-base;
+    font-weight: $peso-normal;
+    color: $color-texto;
+    background-color: $color-fondo;
+    padding: $esp-md;
+}
+
+// Contenedor de las secciones de contenido.
+main{
+    @include flex-columna($esp-md);
+
+    // Ancho máximo de lectura; header y footer usan el mismo.
+    @include desktop{
+        @include contenedor-centrado;
+    }
+}
+
+section{
+    @include flex-columna($esp-md);
+    padding: $esp-md;
+
+    // Habilidades y demás listas de contenido, separadas de forma uniforme.
+    ul{
+        @include flex-columna($esp-sm);
+        padding-left: $esp-md;
+    }
+}

@@ -1,0 +1,45 @@
+// ==========================================================================
+// GRILLAS
+// Los contenedores que reparten las tarjetas en columnas. Mobile-first:
+// arrancan en una sola columna y van sumando a medida que entra el ancho.
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+.servicios{
+    @include grilla(1);
+
+    @include tablet{
+        grid-template-columns: repeat(2, 1fr);
+
+        // Son cinco tarjetas: la última se estira para no dejar un hueco al
+        // final de la grilla.
+        .servicio:last-child{
+            grid-column: 1 / -1;
+        }
+    }
+}
+
+.proyectos{
+    @include grilla(1);
+
+    // Las tarjetas de proyecto son largas: recién en desktop entran de a dos
+    // sin que el texto quede demasiado angosto.
+    @include desktop{
+        grid-template-columns: repeat(2, 1fr);
+        align-items: stretch;
+    }
+}
+
+.datos-contacto{
+    @include grilla(1);
+
+    @include tablet{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include desktop{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

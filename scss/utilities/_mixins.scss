@@ -1,0 +1,135 @@
+// ==========================================================================
+// MIXINS
+// Los patrones que se repetían literalmente en el CSS viejo, ahora escritos
+// una sola vez.
+// ==========================================================================
+
+@use "variables" as *;
+
+// --------------------------------------------------------------------------
+// Media queries: se escriben con el nombre del dispositivo, no con el número.
+// Al ser mixins con @content se pueden anidar dentro del propio selector,
+// que es lo que mantiene junto el estilo mobile y su override de desktop.
+// --------------------------------------------------------------------------
+@mixin tablet {
+    @media (min-width: $bp-tablet) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: $bp-desktop) {
+        @content;
+    }
+}
+
+// --------------------------------------------------------------------------
+// Estructura
+// --------------------------------------------------------------------------
+
+// La columna con gap uniforme: el patrón más repetido del sitio.
+@mixin flex-columna($gap: $esp-md) {
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+}
+
+@mixin grilla($columnas: 1, $gap: $esp-md) {
+    display: grid;
+    grid-template-columns: repeat($columnas, 1fr);
+    gap: $gap;
+}
+
+// Ancho máximo de lectura, centrado. Lo comparten header, main y footer
+// para que los márgenes laterales coincidan.
+@mixin contenedor-centrado {
+    max-width: $ancho-contenido;
+    margin-inline: auto;
+}
+
+// --------------------------------------------------------------------------
+// Superficies
+// --------------------------------------------------------------------------
+
+// Tarjeta: caja con fondo, padding y esquinas redondeadas.
+@mixin tarjeta($fondo: $color-superficie, $gap: $esp-sm) {
+    @include flex-columna($gap);
+    padding: $esp-md;
+    background-color: $fondo;
+    border-radius: $radio-borde;
+}
+
+// La línea lima que separa el encabezado (o el pie) de una tarjeta.
+@mixin separador($lado: bottom) {
+    @if $lado == bottom {
+        padding-bottom: $esp-sm;
+        border-bottom: $borde-ancho solid $color-acento;
+    } @else {
+        padding-top: $esp-sm;
+        border-top: $borde-ancho solid $color-acento;
+    }
+}
+
+// --------------------------------------------------------------------------
+// Tipografía
+// --------------------------------------------------------------------------
+
+// Todos los títulos del sitio comparten familia, peso y color:
+// lo único que cambia entre h1 y h4 es el tamaño.
+@mixin titulo($tamano) {
+    font-family: $fuente-titulos;
+    font-weight: $peso-normal;
+    font-size: $tamano;
+    color: $color-primario;
+}
+
+// --------------------------------------------------------------------------
+// Color
+// --------------------------------------------------------------------------
+
+// Fondo oscuro con texto lima: el estado "activo" de la identidad.
+@mixin colores-invertidos {
+    background-color: $color-primario;
+    color: $color-acento;
+}
+
+// Y el inverso del inverso, que es el hover de los botones.
+@mixin colores-realce {
+    background-color: $color-acento;
+    color: $color-primario;
+}
+
+// --------------------------------------------------------------------------
+// Interacción
+// --------------------------------------------------------------------------
+
+// Transición de colores para links y navegación.
+@mixin transicion-colores {
+    transition: color $duracion-media $curva,
+                background-color $duracion-media $curva;
+}
+
+// Ídem, más el hundido de 2px al hacer click.
+@mixin transicion-boton {
+    transition: background-color $duracion-media $curva,
+                color $duracion-media $curva,
+                transform $duracion-rapida $curva;
+}
+
+// --------------------------------------------------------------------------
+// Piezas puntuales que aparecen en más de un componente
+// --------------------------------------------------------------------------
+
+// El logo cuadrado de una empresa, en tarjetas de proyecto y de experiencia.
+@mixin logo-empresa {
+    width: $tamano-logo;
+    height: $tamano-logo;
+    object-fit: contain;
+    border-radius: $radio-borde;
+}
+
+// Texto chico y gris: rubro, período, metadatos en general.
+@mixin metadato {
+    font-size: $fs-pequeno;
+    color: $color-texto-suave;
+}

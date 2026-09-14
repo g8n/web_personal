@@ -1,0 +1,24 @@
+// ==========================================================================
+// FOOTER
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+footer{
+    @include flex-columna($esp-sm);
+    padding: $esp-md;
+    margin-top: $esp-md;
+
+    @include desktop{
+        @include contenedor-centrado;
+    }
+
+    // Redes sociales en línea, sin viñetas.
+    div ul{
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: $esp-md;
+    }
+}

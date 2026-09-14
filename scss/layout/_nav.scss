@@ -1,0 +1,62 @@
+// ==========================================================================
+// NAV
+// El navbar es un componente de Bootstrap: se lo personaliza pisando sus
+// custom properties en lugar de pelear con sus selectores.
+// ==========================================================================
+
+@use "sass:string";
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+// El ícono de la hamburguesa viaja como SVG embebido en una URL, así que el
+// color hay que interpolarlo sin el "#" y escapado como %23.
+$hex-primario: string.slice("#{$color-primario}", 2);
+
+header{
+
+    .navbar{
+        --bs-navbar-padding-y: 0;
+        --bs-navbar-padding-x: 0;
+        --bs-navbar-color: #{$color-primario};
+        --bs-navbar-hover-color: #{$color-acento};
+        --bs-navbar-active-color: #{$color-primario};
+        --bs-navbar-toggler-border-color: #{$color-primario};
+        --bs-navbar-toggler-focus-width: #{$ancho-foco};
+
+        // El .container-fluid de Bootstrap agrega su propio gutter lateral:
+        // lo anulamos para que el header alinee con el resto del cuerpo.
+        > .container-fluid{
+            padding-inline: 0;
+        }
+    }
+
+    // El título hace de "marca" del navbar.
+    .navbar-brand h1{
+        margin: 0;
+    }
+
+    .navbar-toggler-icon{
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23#{$hex-primario}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    .nav-link{
+        text-decoration: none;
+        @include transicion-colores;
+    }
+
+    .navbar-nav{
+        gap: $esp-nav;
+
+        // Desde acá el navbar ya se despliega solo (navbar-expand-md).
+        @include tablet{
+            gap: $esp-md;
+        }
+
+        .nav-link{
+            &:hover,
+            &:focus{
+                @include colores-invertidos;
+            }
+        }
+    }
+}

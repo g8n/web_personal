@@ -1,0 +1,90 @@
+// ==========================================================================
+// VARIABLES
+// Único lugar donde viven los valores "crudos" del diseño.
+// Ningún otro partial debería escribir un color, un tamaño o un breakpoint
+// a mano: todos se toman de acá.
+// ==========================================================================
+
+// --------------------------------------------------------------------------
+// Paleta cruda
+// --------------------------------------------------------------------------
+$verde-oscuro: #153131;
+$verde-lima: #cdfe00;
+$gris-claro: #e5e7eb;
+$gris-medio: #555555;
+$blanco: #ffffff;
+$negro: #000000;
+
+// --------------------------------------------------------------------------
+// Roles de color: lo que usan los componentes.
+// Cambiar la marca es cambiar estas cinco líneas, no cincuenta reglas.
+// --------------------------------------------------------------------------
+$color-primario: $verde-oscuro;
+$color-acento: $verde-lima;
+$color-fondo: $gris-claro;
+$color-superficie: $blanco;
+$color-texto: $negro;
+$color-texto-suave: $gris-medio;
+$color-texto-invertido: $blanco;
+
+// --------------------------------------------------------------------------
+// Tipografía
+// --------------------------------------------------------------------------
+$fuente-base: 'Roboto', 'open sans';
+$fuente-titulos: 'Bebas Neue', 'Helvetica Neue';
+$fuente-firma: 'Jakobs Handwriting 2', 'open sans';
+
+$peso-normal: 400;
+$peso-fuerte: bold;
+
+$fs-base: 16px;
+$fs-pequeno: 14px;
+$fs-h4: 20px;
+$fs-h3: 24px;
+$fs-h3-desktop: 28px;
+$fs-h2: 32px;
+$fs-h2-desktop: 40px;
+$fs-h1: 36px;
+$fs-h1-desktop: 50px;
+$fs-firma: 40px;
+$fs-flecha: 26px;
+
+// --------------------------------------------------------------------------
+// Espaciado
+// Escala corta y deliberada: todo el sitio respira con estos tres valores.
+// --------------------------------------------------------------------------
+$esp-xs: 5px;
+$esp-sm: 10px;
+$esp-nav: 12px;
+$esp-md: 20px;
+
+// --------------------------------------------------------------------------
+// Bordes y radios
+// --------------------------------------------------------------------------
+$radio-borde: 8px;
+$radio-circulo: 50%;
+$borde-ancho: 2px;
+
+// --------------------------------------------------------------------------
+// Medidas fijas
+// --------------------------------------------------------------------------
+$ancho-contenido: 1100px;
+$ancho-foto: 300px;
+$tamano-logo: 80px;
+$tamano-boton-nav: 36px;
+$ancho-foco: 0.2rem;
+$desplazamiento-activo: 2px;
+
+// --------------------------------------------------------------------------
+// Breakpoints (mobile-first: sólo se usan con min-width)
+// --------------------------------------------------------------------------
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+
+// --------------------------------------------------------------------------
+// Transiciones
+// --------------------------------------------------------------------------
+$curva: ease-in-out;
+$duracion-rapida: 0.1s;
+$duracion-media: 0.2s;
+$duracion-lenta: 0.3s;

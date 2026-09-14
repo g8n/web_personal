@@ -1,0 +1,29 @@
+// ==========================================================================
+// BUTTONS
+// ==========================================================================
+
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
+// Botón de acción: nace oscuro y se invierte al lima en hover.
+// Va después de .dato para ganarle al color de ".dato a" (misma especificidad).
+a.boton{
+    display: inline-block;
+    align-self: start;
+    padding: $esp-sm $esp-md;
+    border: $borde-ancho solid $color-primario;
+    border-radius: $radio-borde;
+    @include colores-invertidos;
+    font-weight: $peso-fuerte;
+    @include transicion-boton;
+
+    &:hover{
+        @include colores-realce;
+    }
+
+    // Al click, además del cambio de color, se hunde un par de píxeles.
+    &:active{
+        @include colores-realce;
+        transform: translateY($desplazamiento-activo);
+    }
+}
