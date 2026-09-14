@@ -48,6 +48,21 @@
     }
 }
 
+// El título de una tarjeta. Es un h2 por jerarquía —cuelga del h1 de la
+// página— pero no encabeza una sección: va al tamaño de un h3 y sin la línea
+// en degradado, que acá competiría con el borde de la propia tarjeta.
+%titulo-tarjeta {
+    @include titulo($fs-h3);
+
+    &::after {
+        content: none;
+    }
+
+    @include desktop {
+        font-size: $fs-h3-desktop;
+    }
+}
+
 // --------------------------------------------------------------------------
 // Piezas chicas
 // --------------------------------------------------------------------------

@@ -21,12 +21,8 @@
     @extend %superficie-tarjeta;
     @extend %tarjeta-interactiva;
 
-    h3{
-        @include titulo($fs-h3);
-
-        @include desktop{
-            font-size: $fs-h3-desktop;
-        }
+    h2{
+        @extend %titulo-tarjeta;
     }
 
     // La respuesta destacada queda separada del resto por la línea lima.
@@ -42,6 +38,10 @@
     @extend %superficie-tarjeta;
     @extend %tarjeta-interactiva;
 
+    h2{
+        @extend %titulo-tarjeta;
+    }
+
     a{
         @extend %enlace-limpio;
         color: $color-primario;
@@ -55,6 +55,10 @@
 .experiencia{
     @extend %superficie-tarjeta;
     height: 100%;
+
+    h2{
+        @extend %titulo-tarjeta;
+    }
 
     .logo{
         @include logo-empresa;

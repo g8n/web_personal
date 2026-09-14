@@ -43,15 +43,12 @@
         transform: scale($escala-hover);
     }
 
-    h3{
-        @include titulo($fs-h3);
-
-        @include desktop{
-            font-size: $fs-h3-desktop;
-        }
+    h2{
+        @extend %titulo-tarjeta;
     }
 
-    h4{
+    // Los subtítulos de la tarjeta ("El problema", "Lo que hicimos").
+    h3{
         @include titulo($fs-h4);
     }
 

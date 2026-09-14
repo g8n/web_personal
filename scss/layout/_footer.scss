@@ -26,7 +26,7 @@ footer{
     }
 
     // Redes sociales en línea, sin viñetas.
-    div ul{
+    nav ul{
         list-style: none;
         display: flex;
         flex-wrap: wrap;
@@ -46,7 +46,7 @@ footer{
     // Cada enlace se subraya con una línea lima que crece de izquierda a
     // derecha al pasar el mouse. Es un ::after escalado en X: en reposo mide
     // 0 y en hover mide 1, y la transición hace el resto.
-    div ul a{
+    nav ul a{
         @extend %enlace-limpio;
         position: relative;
         color: $color-primario;

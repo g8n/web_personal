@@ -17,6 +17,21 @@
   box-shadow: 0 8px 20px rgba(21, 49, 49, 0.18);
 }
 
+.proyecto h2, .servicio h2, .dato h2, .experiencia h2 {
+  font-family: "Bebas Neue", "Helvetica Neue";
+  font-weight: 400;
+  font-size: 24px;
+  color: #153131;
+}
+.proyecto h2::after, .servicio h2::after, .dato h2::after, .experiencia h2::after {
+  content: none;
+}
+@media (min-width: 1024px) {
+  .proyecto h2, .servicio h2, .dato h2, .experiencia h2 {
+    font-size: 28px;
+  }
+}
+
 .proyecto .etapa, .proyecto .keywords li {
   padding: 5px 10px;
   border-radius: 8px;
@@ -25,7 +40,7 @@
   line-height: 1.4;
 }
 
-a.boton, .dato a, footer div ul a, header .nav-link, article a,
+a.boton, .dato a, footer nav ul a, header .navbar-brand, header .nav-link, article a,
 footer a {
   text-decoration: none;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
@@ -117,6 +132,13 @@ h2 {
   font-size: 32px;
   color: #153131;
 }
+@media (min-width: 1024px) {
+  h2 {
+    font-size: 40px;
+  }
+}
+
+h1::after,
 h2::after {
   content: "";
   display: block;
@@ -132,11 +154,6 @@ h2::after {
   animation-delay: 0.12s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: backwards;
-}
-@media (min-width: 1024px) {
-  h2 {
-    font-size: 40px;
-  }
 }
 
 figcaption {
@@ -230,20 +247,29 @@ header .navbar {
   --bs-navbar-color: #153131;
   --bs-navbar-hover-color: #cdfe00;
   --bs-navbar-active-color: #153131;
+  --bs-navbar-brand-color: #153131;
+  --bs-navbar-brand-hover-color: #153131;
   --bs-navbar-toggler-border-color: #153131;
   --bs-navbar-toggler-focus-width: 0.2rem;
 }
 header .navbar > .container-fluid {
   padding-inline: 0;
 }
-header .navbar-brand h1 {
+header .navbar-brand {
+  font-family: "Bebas Neue", "Helvetica Neue";
+  font-weight: 400;
+  font-size: 36px;
+  color: #153131;
   margin: 0;
+  padding: 0;
 }
-header .navbar-brand h1::after {
-  content: none;
+@media (min-width: 1024px) {
+  header .navbar-brand {
+    font-size: 50px;
+  }
 }
 @media (max-width: 480px) {
-  header .navbar-brand h1 {
+  header .navbar-brand {
     font-size: 32px;
   }
 }
@@ -486,7 +512,7 @@ footer {
     margin-inline: auto;
   }
 }
-footer div ul {
+footer nav ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -498,12 +524,12 @@ footer h2 {
 footer h2::after {
   content: none;
 }
-footer div ul a {
+footer nav ul a {
   position: relative;
   color: #153131;
   font-weight: bold;
 }
-footer div ul a::after {
+footer nav ul a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -516,21 +542,10 @@ footer div ul a::after {
   transform-origin: left;
   transition: transform 0.3s ease-in-out;
 }
-footer div ul a:hover::after, footer div ul a:focus-visible::after {
+footer nav ul a:hover::after, footer nav ul a:focus-visible::after {
   transform: scaleX(1);
 }
 
-.servicio h3 {
-  font-family: "Bebas Neue", "Helvetica Neue";
-  font-weight: 400;
-  font-size: 24px;
-  color: #153131;
-}
-@media (min-width: 1024px) {
-  .servicio h3 {
-    font-size: 28px;
-  }
-}
 .servicio .Destacado {
   border-image: linear-gradient(to right, #cdfe00, rgb(65.9215686275%, 81.6784313725%, 0%) 40%, transparent) 1;
   padding-bottom: 10px;
@@ -614,7 +629,7 @@ a.boton:active {
   gap: 20px;
   grid-template-areas: "titulo" "foto" "texto";
 }
-.presentacion h2 {
+.presentacion h1 {
   grid-area: titulo;
 }
 .presentacion figure {
@@ -699,17 +714,6 @@ a.boton:active {
   transform: scale(1.08);
 }
 .proyecto h3 {
-  font-family: "Bebas Neue", "Helvetica Neue";
-  font-weight: 400;
-  font-size: 24px;
-  color: #153131;
-}
-@media (min-width: 1024px) {
-  .proyecto h3 {
-    font-size: 28px;
-  }
-}
-.proyecto h4 {
   font-family: "Bebas Neue", "Helvetica Neue";
   font-weight: 400;
   font-size: 20px;

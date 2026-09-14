@@ -21,6 +21,10 @@ header{
         --bs-navbar-color: #{$color-primario};
         --bs-navbar-hover-color: #{$color-acento};
         --bs-navbar-active-color: #{$color-primario};
+        // La marca no cambia de color al pasar el mouse: es el nombre del
+        // sitio, no una opción del menú.
+        --bs-navbar-brand-color: #{$color-primario};
+        --bs-navbar-brand-hover-color: #{$color-primario};
         --bs-navbar-toggler-border-color: #{$color-primario};
         --bs-navbar-toggler-focus-width: #{$ancho-foco};
 
@@ -31,17 +35,19 @@ header{
         }
     }
 
-    // El título hace de "marca" del navbar.
-    .navbar-brand h1{
+    // El nombre hace de "marca" del navbar y enlaza al inicio. No es un
+    // título de contenido: el h1 de cada página vive dentro de <main>.
+    .navbar-brand{
+        @extend %enlace-limpio;
+        @include titulo($fs-h1);
         margin: 0;
+        padding: 0;
 
-        // El h1 del header no lleva la línea en degradado: ahí abajo está la
-        // del propio header y quedarían dos líneas pegadas.
-        &::after{
-            content: none;
+        @include desktop{
+            font-size: $fs-h1-desktop;
         }
 
-        // En celulares angostos el h1 de 36px compite por el ancho con el
+        // En celulares angostos el nombre de 36px compite por el ancho con el
         // botón hamburguesa y lo empuja fuera de la pantalla.
         @include mobile{
             font-size: $fs-h2;
